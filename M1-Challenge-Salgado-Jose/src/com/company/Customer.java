@@ -42,10 +42,6 @@ public class Customer {
         return charges;
     }
 
-    public void addCharge(AccountRecord charge) {
-        charges.add(charge);
-    }
-
     @Override
     public String toString() {
         return String.format("{ID: %d, Name: %s, Balance: %d}", this.id, this.name, this.getBalance());

@@ -37,15 +37,13 @@ public class Main {
             Optional<Customer> existing = customers.stream()
                     .filter(customer -> customer.getId() == Integer.parseInt(data[0]))
                     .findFirst();
-            Customer currentCustomer = null;
+            Customer currentCustomer;
 
             // If customer exists, set current customer
             if (existing.isPresent()) {
                 currentCustomer = existing.get();
-            }
-
-            // If no customer exists, create one
-            if (currentCustomer == null) {
+            } else {
+            // Else if no customer exists, create one
                 Customer newCustomer = new Customer();
                 newCustomer.setId(Integer.parseInt(data[0]));
                 newCustomer.setName(data[1]);
@@ -61,7 +59,7 @@ public class Main {
             AccountRecord charge = new AccountRecord();
             charge.setCharge(Integer.parseInt(data[2]));
             charge.setChargeDate(data[3]);
-            currentCustomer.addCharge(charge);
+            currentCustomer.getCharges().add(charge);
         }
 
         // Using streams to find account balances
