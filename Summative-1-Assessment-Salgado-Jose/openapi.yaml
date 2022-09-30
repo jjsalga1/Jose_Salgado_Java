@@ -1,0 +1,95 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /magic:
+    post:
+      tags:
+        - magic-controller
+      operationId: createAnswer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Answer'
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Answer'
+  /word:
+    get:
+      tags:
+        - word-controller
+      operationId: getWord
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Definition'
+  /quote:
+    get:
+      tags:
+        - quote-controller
+      operationId: getQuote
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Quote'
+  /magic/history:
+    get:
+      tags:
+        - magic-controller
+      operationId: getAnswerList
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Answer'
+components:
+  schemas:
+    Answer:
+      type: object
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+        id:
+          type: integer
+          format: int32
+    Definition:
+      type: object
+      properties:
+        word:
+          type: string
+        definition:
+          type: string
+        id:
+          type: integer
+          format: int32
+    Quote:
+      type: object
+      properties:
+        author:
+          type: string
+        quote:
+          type: string
+        id:
+          type: integer
+          format: int32
